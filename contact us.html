@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تماس با ما | آکادمی آیدا عبداللهی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --jasmine-1: #f3eefb;
+            --jasmine-2: #e7defa;
+            --gold: #c9a86a;
+            --gold-light: #e8d5a8;
+            --purple-deep: #5a3f8c;
+            --purple-mid: #7f5fc7;
+            --purple-light: #b39de0;
+            --navy-1: #0a1832;
+            --navy-2: #0f2447;
+            --azure: #1c4fa3;
+            --azure-light: #3a7bd5;
+            --azure-glow: #5e9bff;
+            --ink: #1b1b1f;
+            --ink-light: #4a4458;
+            --white: #ffffff;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 14px;
+            --shadow-soft: 0 20px 50px -15px rgba(20, 20, 40, 0.25);
+            --shadow-card: 0 10px 30px -8px rgba(20, 20, 40, 0.12);
+            --shadow-hover: 0 25px 55px -15px rgba(90, 63, 140, 0.30);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #fbfaf8;
+            color: var(--ink);
+            overflow-x: hidden;
+            direction: rtl;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+        /* ===== پس‌زمینه با ذرات و موج ===== */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(127, 95, 199, 0.15), transparent 70%);
+            animation: floatParticle 18s infinite alternate ease-in-out;
+        }
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 5%;
+            animation-duration: 22s;
+        }
+        .particle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            bottom: 15%;
+            right: 8%;
+            animation-duration: 26s;
+            background: radial-gradient(circle, rgba(201, 168, 106, 0.12), transparent 70%);
+        }
+        .particle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            right: 25%;
+            animation-duration: 20s;
+            background: radial-gradient(circle, rgba(58, 123, 213, 0.10), transparent 70%);
+        }
+        .particle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 30%;
+            left: 20%;
+            animation-duration: 24s;
+            background: radial-gradient(circle, rgba(127, 95, 199, 0.08), transparent 70%);
+        }
+        @keyframes floatParticle {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -40px) scale(1.1) rotate(12deg);
+            }
+            66% {
+                transform: translate(-20px, 30px) scale(0.9) rotate(-8deg);
+            }
+            100% {
+                transform: translate(15px, -20px) scale(1.05) rotate(5deg);
+            }
+        }
+
+        /* موج متحرک در پایین */
+        .wave-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .wave {
+            position: absolute;
+            bottom: -20px;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(127, 95, 199, 0.04) 25%,
+                    transparent 50%,
+                    rgba(201, 168, 106, 0.04) 75%,
+                    transparent 100%);
+            border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+            animation: waveMove 12s infinite linear;
+        }
+        .wave:nth-child(2) {
+            animation-duration: 18s;
+            opacity: 0.5;
+            bottom: -10px;
+            background: repeating-linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(58, 123, 213, 0.03) 30%,
+                    transparent 60%);
+        }
+        @keyframes waveMove {
+            0% {
+                transform: translateX(0) scaleY(0.6);
+            }
+            50% {
+                transform: translateX(-25%) scaleY(1);
+            }
+            100% {
+                transform: translateX(-50%) scaleY(0.6);
+            }
+        }
+
+        /* ===== کارت اصلی ===== */
+        .contact-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow-soft), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            padding: 48px 44px 44px 44px;
+            max-width: 1280px;
+            width: 100%;
+            transition: var(--transition);
+            animation: fadeInUp 0.8s ease;
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== هدر ===== */
+        .contact-header {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+        .contact-header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--jasmine-2), var(--jasmine-1));
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--purple-deep);
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(127, 95, 199, 0.10);
+        }
+        .contact-header h1 {
+            font-size: 38px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple-deep), var(--azure-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+        .contact-header p {
+            font-size: 17px;
+            color: var(--ink-light);
+            max-width: 540px;
+            margin: 10px auto 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== شبکه اصلی ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 40px;
+        }
+
+        /* ===== بخش اطلاعات (سمت راست در RTL) ===== */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .info-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            backdrop-filter: blur(6px);
+        }
+        .info-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(127, 95, 199, 0.15);
+            background: #fff;
+        }
+        .info-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--jasmine-2), var(--jasmine-1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-deep);
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .info-item:hover .info-icon {
+            background: linear-gradient(135deg, var(--purple-mid), var(--azure-light));
+            color: #fff;
+            transform: scale(1.05) rotate(-3deg);
+        }
+        .info-icon svg {
+            width: 26px;
+            height: 26px;
+        }
+        .info-content h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .info-content p,
+        .info-content a {
+            font-size: 15px;
+            color: var(--ink-light);
+            line-height: 1.6;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .info-content a:hover {
+            color: var(--purple-deep);
+        }
+
+        /* شبکه‌های اجتماعی در info */
+        .social-inline {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .social-inline a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-light);
+            transition: var(--transition);
+        }
+        .social-inline a:hover {
+            background: var(--purple-deep);
+            color: #fff;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 24px -10px rgba(90, 63, 140, 0.3);
+            border-color: var(--purple-deep);
+        }
+        .social-inline a svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* ===== فرم تماس ===== */
+        .form-panel {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-md);
+            padding: 32px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.04);
+        }
+        .form-panel h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--purple-deep);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-panel h2 svg {
+            width: 28px;
+            height: 28px;
+            color: var(--gold);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink-light);
+            margin-bottom: 6px;
+            padding-right: 4px;
+        }
+        .form-group .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+            border: 1.5px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            padding: 0 16px;
+        }
+        .form-group .input-wrap:focus-within {
+            border-color: var(--purple-mid);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(127, 95, 199, 0.08);
+        }
+        .form-group .input-wrap .icon {
+            color: var(--ink-light);
+            opacity: 0.4;
+            flex-shrink: 0;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .form-group .input-wrap .icon svg {
+            width: 20px;
+            height: 20px;
+        }
+        .form-group .input-wrap input,
+        .form-group .input-wrap textarea {
+            width: 100%;
+            padding: 14px 0;
+            border: none;
+            background: transparent;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 15px;
+            color: var(--ink);
+            outline: none;
+            resize: vertical;
+            min-height: 48px;
+        }
+        .form-group .input-wrap textarea {
+            min-height: 110px;
+            padding-top: 14px;
+        }
+        .form-group .input-wrap input::placeholder,
+        .form-group .input-wrap textarea::placeholder {
+            color: #b5b0c4;
+            font-weight: 400;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, var(--purple-mid), #9c7fd6);
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 12px 30px -10px rgba(90, 63, 140, 0.30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -12px rgba(90, 63, 140, 0.45);
+        }
+        .submit-btn:active {
+            transform: scale(0.97);
+        }
+        .submit-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* ===== نقشه ===== */
+        .map-section {
+            margin-top: 40px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            height: 220px;
+            transition: var(--transition);
+        }
+        .map-section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ===== پاسخگویی ===== */
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .contact-card {
+                padding: 32px 24px;
+            }
+            .contact-header h1 {
+                font-size: 30px;
+            }
+        }
+        @media (max-width: 600px) {
+            .contact-card {
+                padding: 24px 16px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .info-item {
+                padding: 18px 20px;
+                flex-wrap: wrap;
+            }
+            .contact-header h1 {
+                font-size: 26px;
+            }
+            .map-section {
+                height: 160px;
+            }
+            .wave-container {
+                height: 60px;
+            }
+        }
+        @media (max-width: 400px) {
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .social-inline a {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        /* ===== انیمیشن ورود آیتم‌ها ===== */
+        .info-item,
+        .form-panel,
+        .map-section {
+            opacity: 0;
+            animation: fadeSlide 0.6s ease forwards;
+        }
+        .info-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .info-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .info-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        .info-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        .form-panel {
+            animation-delay: 0.2s;
+        }
+        .map-section {
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== بازگشت به صفحه اصلی ===== */
+        .back-link {
+            position: fixed;
+            top: 24px;
+            right: 28px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--purple-deep);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 20px -10px rgba(0, 0, 0, 0.10);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .back-link:hover {
+            background: #fff;
+            box-shadow: 0 12px 30px -12px rgba(90, 63, 140, 0.25);
+            transform: translateY(-2px);
+        }
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+        @media (max-width: 500px) {
+            .back-link span {
+                display: none;
+            }
+            .back-link {
+                top: 16px;
+                right: 16px;
+                padding: 8px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== پس‌زمینه ذرات و موج ===== -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    <div class="wave-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- ===== لینک بازگشت ===== -->
+    <a href="aidaacademy-landing.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>بازگشت به صفحه اصلی</span>
+    </a>
+
+    <!-- ===== کارت اصلی تماس ===== -->
+    <div class="contact-card">
+
+        <!-- هدر -->
+        <div class="contact-header">
+            <div class="badge">📞 ارتباط با ما</div>
+            <h1>در تماس باشید</h1>
+            <p>ما مشتاق شنیدن صدای شما هستیم. سوالات، پیشنهادات و همکاری‌ها را با ما در میان بگذارید.</p>
+        </div>
+
+        <!-- شبکه اصلی -->
+        <div class="contact-grid">
+
+            <!-- بخش اطلاعات -->
+            <div class="info-panel">
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.574 2.81.7A2 2 0 0122 16.92z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>تلفن تماس</h3>
+                        <a href="tel:09146952770">۰۹۱۴-۶۹۵-۲۷۷۰</a>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>ایمیل</h3>
+                        <a href="mailto:info@aidaacademy.ir">info@aidaacademy.ir</a>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>آدرس</h3>
+                        <p>تبریز، خیابان ولیعصر، ساختمان آیدا</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 3"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>ساعات کاری</h3>
+                        <p>شنبه تا چهارشنبه ۹ صبح تا ۱۸</p>
+                    </div>
+                </div>
+
+                <div class="info-item" style="background:linear-gradient(135deg, rgba(127,95,199,0.05), rgba(58,123,213,0.05)); border-color:rgba(127,95,199,0.10);">
+                    <div class="info-icon" style="background:linear-gradient(135deg, var(--purple-mid), var(--azure-light)); color:#fff;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>شبکه‌های اجتماعی</h3>
+                        <div class="social-inline">
+                            <a href="#" aria-label="اینستاگرام">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+                                    <circle cx="12" cy="12" r="4"/>
+                                    <circle cx="17.2" cy="6.8" r="1"/>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="تلگرام">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                                    <path d="M8 12l3-2 3 2-3 2-3-2z"/>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="واتساپ">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <path d="M9 8h6M9 12h4M9 16h2"/>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="لینکدین">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+                                    <rect x="2" y="9" width="4" height="12"/>
+                                    <circle cx="4" cy="4" r="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- فرم تماس -->
+            <div class="form-panel">
+                <h2>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                    </svg>
+                    ارسال پیام
+                </h2>
+                <form id="contact-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">نام و نام خانوادگی</label>
+                            <div class="input-wrap">
+                                <span class="icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </span>
+                                <input type="text" id="name" placeholder="نام خود را وارد کنید" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">ایمیل</label>
+                            <div class="input-wrap">
+                                <span class="icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                </span>
+                                <input type="email" id="email" placeholder="example@email.com" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">شماره تماس (اختیاری)</label>
+                        <div class="input-wrap">
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.574 2.81.7A2 2 0 0122 16.92z"/>
+                                </svg>
+                            </span>
+                            <input type="tel" id="phone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">موضوع</label>
+                        <div class="input-wrap">
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                                </svg>
+                            </span>
+                            <input type="text" id="subject" placeholder="موضوع پیام را بنویسید" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">متن پیام</label>
+                        <div class="input-wrap">
+                            <span class="icon" style="align-self:flex-start; margin-top:14px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                                </svg>
+                            </span>
+                            <textarea id="message" placeholder="پیام خود را بنویسید..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        ارسال پیام
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 6l-6 6 6 6"/>
+                        </svg>
+                    </button>
+                    <div id="form-message" style="margin-top:14px; font-size:14px; font-weight:600; text-align:center;"></div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- نقشه -->
+        <div class="map-section">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3093.696738218585!2d46.2915!3d38.0800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401a6f1b8f6b1b1b%3A0x1b1b1b1b1b1b1b1b!2sTabriz%2C%20East%20Azerbaijan%20Province%2C%20Iran!5e0!3m2!1sen!2sus!4v1710000000000"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="نقشه آکادمی آیدا در تبریز"
+            ></iframe>
+        </div>
+
+    </div>
+
+    <!-- ===== اسکریپت فرم ===== -->
+    <script>
+        (function() {
+            const form = document.getElementById('contact-form');
+            const msgDiv = document.getElementById('form-message');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !email || !subject || !message) {
+                    msgDiv.style.color = '#b34033';
+                    msgDiv.textContent = '❌ لطفاً تمام فیلدهای ضروری را پر کنید.';
+                    return;
+                }
+                if (!email.includes('@') || !email.includes('.')) {
+                    msgDiv.style.color = '#b34033';
+                    msgDiv.textContent = '❌ لطفاً یک ایمیل معتبر وارد کنید.';
+                    return;
+                }
+
+                // شبیه‌سازی ارسال موفق
+                msgDiv.style.color = '#1e7b4a';
+                msgDiv.textContent = '✅ پیام شما با موفقیت ارسال شد. به زودی با شما تماس می‌گیریم.';
+                form.reset();
+
+                // پاک کردن پیام بعد از ۵ ثانیه
+                setTimeout(() => {
+                    msgDiv.textContent = '';
+                }, 6000);
+            });
+        })();
+    </script>
+
+</body>
+</html>

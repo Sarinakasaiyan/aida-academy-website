@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>درباره ما | آکادمی آیدا عبداللهی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --jasmine-1: #f3eefb;
+            --jasmine-2: #e7defa;
+            --gold: #c9a86a;
+            --gold-light: #e8d5a8;
+            --gold-dark: #b8924a;
+            --purple-deep: #5a3f8c;
+            --purple-mid: #7f5fc7;
+            --purple-light: #b39de0;
+            --navy-1: #0a1832;
+            --navy-2: #0f2447;
+            --azure: #1c4fa3;
+            --azure-light: #3a7bd5;
+            --azure-glow: #5e9bff;
+            --ink: #1b1b1f;
+            --ink-light: #4a4458;
+            --white: #ffffff;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 14px;
+            --shadow-soft: 0 20px 50px -15px rgba(20, 20, 40, 0.20);
+            --shadow-card: 0 10px 30px -8px rgba(20, 20, 40, 0.10);
+            --shadow-hover: 0 25px 55px -15px rgba(90, 63, 140, 0.25);
+            --transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #fbfaf8;
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ===== بازگشت ===== */
+        .back-link {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--purple-deep);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 10px 22px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 20px -10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+        .back-link:hover {
+            background: #fff;
+            box-shadow: 0 12px 30px -12px rgba(90, 63, 140, 0.25);
+            transform: translateY(-2px);
+        }
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ===== هدر صفحه ===== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
+        .page-header .badge {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--purple-mid);
+            background: rgba(127, 95, 199, 0.10);
+            padding: 6px 20px;
+            border-radius: 40px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(127, 95, 199, 0.10);
+        }
+        .page-header h1 {
+            font-size: 46px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-deep), var(--azure-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+        .page-header h1 span {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .page-header p {
+            font-size: 18px;
+            color: var(--ink-light);
+            max-width: 680px;
+            margin: 12px auto 0 auto;
+            font-weight: 400;
+        }
+
+        /* ===== بخش داستان (Hero داخلی) ===== */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 50px 48px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 168, 106, 0.06), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .story-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(127, 95, 199, 0.06), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .story-text {
+            position: relative;
+            z-index: 2;
+        }
+        .story-text .kicker {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .story-text .kicker::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold-light), transparent);
+        }
+        .story-text h2 {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: var(--purple-deep);
+        }
+        .story-text h2 span {
+            color: var(--gold-dark);
+        }
+        .story-text p {
+            font-size: 16px;
+            color: var(--ink-light);
+            line-height: 2;
+            margin-bottom: 16px;
+        }
+        .story-text .highlight {
+            font-weight: 700;
+            color: var(--purple-deep);
+            font-size: 17px;
+            border-right: 4px solid var(--gold);
+            padding-right: 16px;
+            background: rgba(201, 168, 106, 0.06);
+            border-radius: 0 12px 12px 0;
+            padding: 12px 20px;
+        }
+        .story-image {
+            position: relative;
+            z-index: 2;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.20);
+            min-height: 380px;
+            background: var(--jasmine-1);
+            background-image: url('9272ea7a-4433-4d4a-9288-bd82b1a159d6.png');
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+        .story-image:hover {
+            transform: scale(1.01);
+        }
+        .story-image .overlay-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(90, 63, 140, 0.10), rgba(58, 123, 213, 0.05));
+            pointer-events: none;
+        }
+
+        /* ===== تایم‌لاین ===== */
+        .timeline-section {
+            margin-bottom: 60px;
+        }
+        .timeline-section .section-label {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--purple-mid);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .timeline-section h3 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--ink);
+        }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            padding-right: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px;
+            top: 12px;
+            bottom: 12px;
+            width: 3px;
+            background: linear-gradient(180deg, var(--purple-mid), var(--gold), var(--azure-light));
+            border-radius: 4px;
+            opacity: 0.3;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 18px 24px;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            position: relative;
+            cursor: default;
+        }
+        .timeline-item:hover {
+            transform: translateX(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(127, 95, 199, 0.10);
+        }
+        .timeline-item .year {
+            min-width: 70px;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--purple-deep);
+            background: var(--jasmine-1);
+            padding: 4px 14px;
+            border-radius: 40px;
+            text-align: center;
+            font-feature-settings: "tnum";
+        }
+        .timeline-item .content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .timeline-item .content p {
+            font-size: 14px;
+            color: var(--ink-light);
+            line-height: 1.8;
+        }
+        .timeline-item .dot {
+            position: absolute;
+            right: -26px;
+            top: 28px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--purple-mid);
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px var(--purple-mid);
+            transition: var(--transition);
+        }
+        .timeline-item:hover .dot {
+            transform: scale(1.2);
+            background: var(--gold);
+            box-shadow: 0 0 0 4px var(--gold-light);
+        }
+        .timeline-item:nth-child(2) .dot {
+            background: var(--gold);
+            box-shadow: 0 0 0 2px var(--gold);
+        }
+        .timeline-item:nth-child(3) .dot {
+            background: var(--azure-light);
+            box-shadow: 0 0 0 2px var(--azure-light);
+        }
+        .timeline-item:nth-child(4) .dot {
+            background: var(--purple-light);
+            box-shadow: 0 0 0 2px var(--purple-light);
+        }
+
+        /* ===== تیم ما ===== */
+        .team-section {
+            margin-bottom: 60px;
+        }
+        .team-section .section-label {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .team-section h3 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .team-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: 32px 24px 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple-mid), var(--gold));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .team-card:hover::before {
+            opacity: 1;
+        }
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(127, 95, 199, 0.08);
+        }
+        .team-card .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 16px auto;
+            background: var(--jasmine-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--purple-deep);
+            box-shadow: 0 8px 24px -10px rgba(90, 63, 140, 0.15);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .team-card .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .team-card:hover .avatar {
+            transform: scale(1.04);
+        }
+        .team-card h4 {
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: var(--purple-deep);
+        }
+        .team-card .role {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+        }
+        .team-card p {
+            font-size: 14px;
+            color: var(--ink-light);
+            line-height: 1.8;
+        }
+        .team-card .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .team-card .social-icons a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--jasmine-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-deep);
+            transition: var(--transition);
+        }
+        .team-card .social-icons a:hover {
+            background: var(--purple-deep);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ===== آمار ===== */
+        .stats-showcase {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+        .stats-showcase .stat-item .number {
+            font-size: 44px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-deep), var(--azure-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            font-feature-settings: "tnum";
+        }
+        .stats-showcase .stat-item .label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink-light);
+            margin-top: 2px;
+        }
+
+        /* ===== نقل قول ===== */
+        .quote-section {
+            background: linear-gradient(135deg, var(--navy-1), #16345e);
+            border-radius: var(--radius-lg);
+            padding: 50px 48px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .quote-section::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            right: 30px;
+            font-size: 160px;
+            color: rgba(255, 255, 255, 0.04);
+            font-family: serif;
+            line-height: 1;
+        }
+        .quote-section blockquote {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            max-width: 780px;
+            margin: 0 auto 12px auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        .quote-section .attribution {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+        .quote-section .attribution span {
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        /* ===== ریسپانسیو ===== */
+        @media (max-width: 992px) {
+            .story-section {
+                grid-template-columns: 1fr;
+                padding: 36px 28px;
+                gap: 30px;
+            }
+            .story-image {
+                min-height: 280px;
+            }
+            .stats-showcase {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .page-header h1 {
+                font-size: 34px;
+            }
+        }
+        @media (max-width: 640px) {
+            .page-header h1 {
+                font-size: 28px;
+            }
+            .story-section {
+                padding: 24px 18px;
+            }
+            .story-text h2 {
+                font-size: 26px;
+            }
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 16px 18px;
+            }
+            .timeline-item .year {
+                font-size: 16px;
+                padding: 2px 12px;
+            }
+            .timeline-item .dot {
+                display: none;
+            }
+            .timeline {
+                padding-right: 0;
+            }
+            .timeline::before {
+                display: none;
+            }
+            .stats-showcase {
+                grid-template-columns: 1fr 1fr;
+                padding: 24px 16px;
+                gap: 20px;
+            }
+            .stats-showcase .stat-item .number {
+                font-size: 32px;
+            }
+            .quote-section blockquote {
+                font-size: 20px;
+            }
+            .quote-section {
+                padding: 32px 20px;
+            }
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 440px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .back-link span {
+                display: none;
+            }
+        }
+
+        /* ===== انیمیشن ورود ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+        .fade-up-d1 {
+            animation-delay: 0.1s;
+        }
+        .fade-up-d2 {
+            animation-delay: 0.2s;
+        }
+        .fade-up-d3 {
+            animation-delay: 0.3s;
+        }
+        .fade-up-d4 {
+            animation-delay: 0.4s;
+        }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== لینک بازگشت ===== -->
+        <a href="aidaacademy-landing.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>بازگشت به صفحه اصلی</span>
+        </a>
+
+        <!-- ===== هدر ===== -->
+        <div class="page-header fade-up">
+            <div class="badge">✦ درباره ما</div>
+            <h1>داستان <span>آکادمی آیدا</span></h1>
+            <p>ما با عشق به آموزش و تعهد به رشد استعدادها، مسیری نوین برای یادگیری خلق کرده‌ایم.</p>
+        </div>
+
+        <!-- ===== بخش داستان ===== -->
+        <section class="story-section fade-up fade-up-d1">
+            <div class="story-text">
+                <div class="kicker">از یک آرزو تا یک آکادمی</div>
+                <h2>آیدا عبداللهی <span>و مسیری برای شکوفایی</span></h2>
+                <p>
+                    آکادمی آیدا در سال ۱۳۹۸ با یک هدف ساده متولد شد: ایجاد فضایی که در آن هر دانش‌آموز
+                    بتواند با اعتمادبه‌نفس و انگیزه، مسیر موفقیت خود را پیدا کند. آیدا عبداللهی، با
+                    تحصیلات تخصصی در روانشناسی تربیتی و سال‌ها تجربه تدریس، به این باور رسید که
+                    آموزش مؤثر فراتر از انتقال دانش است؛ بلکه پرورش ذهن و شخصیت است.
+                </p>
+                <p>
+                    امروز، آکادمی آیدا به خانه‌ای امن برای صدها دانش‌آموز تبدیل شده که در کنار
+                    یادگیری دروس، مهارت‌های زندگی، تفکر نقادانه و انگیزه‌ی درونی خود را تقویت می‌کنند.
+                </p>
+                <div class="highlight">
+                    «ما به جای تدریس، جرقه‌های یادگیری را روشن می‌کنیم.»
+                </div>
+            </div>
+           <img src="9272ea7a-4433-4d4a-9288-bd82b1a159d6.png" width="500" height="700">
+                <div class="overlay-glow"></div>
+            </div>
+        </section>
+
+        <!-- ===== تایم‌لاین ===== -->
+        <section class="timeline-section fade-up fade-up-d2">
+            <div class="section-label">مسیر ما</div>
+            <h3>گام‌های <span style="color:var(--purple-deep);">رشد</span></h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="dot"></span>
+                    <div class="year">۱۳۹۸</div>
+                    <div class="content">
+                        <h4>شروع آکادمی</h4>
+                        <p>آیدا عبداللهی با چند دانش‌آموز در یک فضای کوچک، تدریس خصوصی را آغاز کرد. جرقه‌ی اولیه‌ی آکادمی.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="dot"></span>
+                    <div class="year">۱۴۰۰</div>
+                    <div class="content">
+                        <h4>توسعه دوره‌ها</h4>
+                        <p>افزایش دوره‌های آموزشی به مقاطع چهارم تا ششم و راه‌اندازی کلاس‌های تیزهوشان با استقبال بی‌نظیر.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="dot"></span>
+                    <div class="year">۱۴۰۲</div>
+                    <div class="content">
+                        <h4>مشاوره کنکور</h4>
+                        <p>ارائه خدمات مشاوره تخصصی کنکور و برنامه‌ریزی تحصیلی، همراه با کارگاه‌های انگیزشی و مدیریت استرس.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="dot"></span>
+                    <div class="year">۱۴۰۴</div>
+                    <div class="content">
+                        <h4>آکادمی دیجیتال</h4>
+                        <p>راه‌اندازی پلتفرم آنلاین اختصاصی با کیفیت بالا، دسترسی آسان‌تر برای دانش‌آموزان سراسر کشور.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== آمار ===== -->
+        <div class="stats-showcase fade-up fade-up-d3">
+            <div class="stat-item">
+                <div class="number">۸+</div>
+                <div class="label">سال تجربه</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">۴۲۰+</div>
+                <div class="label">دانش‌آموز موفق</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">۹۸%</div>
+                <div class="label">رضایت دانش‌آموزان</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">۳۲</div>
+                <div class="label">قبولی تیزهوشان</div>
+            </div>
+        </div>
+
+        <!-- ===== تیم ما ===== -->
+        <section class="team-section fade-up fade-up-d3">
+
+            <h3>افرادی که <span style="color:var(--gold-dark);">می‌سازند</span></h3>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="avatar">
+                        <img src="9272ea7a-4433-4d4a-9288-bd82b1a159d6.png" width="100" height="600"  alt="آیدا عبداللهی" />
+                    </div>
+                    <h4>آیدا عبداللهی</h4>
+                    <div class="role">بنیان‌گذار و مدرس ارشد</div>
+                    <p>کارشناس ارشد روانشناسی تربیتی، با بیش از ۸ سال تجربه در تدریس و مشاوره تحصیلی.</p>
+                    <div class="social-icons">
+                        <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+                        <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="12" cy="12" r="9"/><path d="M9 8h6M9 12h4M9 16h2"/></svg></a>
+                    </div>
+                </div>
+               
+        </section>
+
+        <!-- ===== نقل قول ===== -->
+        <section class="quote-section fade-up fade-up-d4">
+            <blockquote>
+                «آموزش واقعی زمانی اتفاق می‌افتد که دانش‌آموز نه فقط پاسخ سوال را بداند، بلکه جرأت پرسیدن سوالات جدید را داشته باشد.»
+            </blockquote>
+            <div class="attribution">— <span>آیدا عبداللهی</span>، بنیان‌گذار آکادمی</div>
+        </section>
+
+    </div>
+
+</body>
+</html>

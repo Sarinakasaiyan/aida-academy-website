@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>باشگاه هوش | آکادمی آیدا</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --jasmine-1: #f3eefb;
+            --jasmine-2: #e7defa;
+            --gold: #c9a86a;
+            --gold-light: #e8d5a8;
+            --gold-dark: #b8924a;
+            --purple-deep: #5a3f8c;
+            --purple-mid: #7f5fc7;
+            --purple-light: #b39de0;
+            --navy-1: #0a1832;
+            --azure-light: #3a7bd5;
+            --azure-glow: #5e9bff;
+            --ink: #1b1b1f;
+            --ink-light: #4a4458;
+            --white: #ffffff;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 14px;
+            --shadow-soft: 0 20px 50px -15px rgba(20, 20, 40, 0.20);
+            --shadow-card: 0 10px 30px -8px rgba(20, 20, 40, 0.10);
+            --shadow-hover: 0 25px 55px -15px rgba(90, 63, 140, 0.25);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #fbfaf8;
+            color: var(--ink);
+            overflow-x: hidden;
+            direction: rtl;
+            min-height: 100vh;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        /* ===== پس‌زمینه با ذرات رنگارنگ ===== */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatParticle 25s infinite alternate ease-in-out;
+            opacity: 0.10;
+        }
+        .particle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 5%;
+            left: 3%;
+            background: radial-gradient(circle, #a18cd1, transparent 70%);
+            animation-duration: 28s;
+        }
+        .particle:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            right: 5%;
+            background: radial-gradient(circle, #fbc2eb, transparent 70%);
+            animation-duration: 22s;
+            animation-delay: 2s;
+        }
+        .particle:nth-child(3) {
+            width: 160px;
+            height: 160px;
+            top: 50%;
+            left: 25%;
+            background: radial-gradient(circle, #fddb92, transparent 70%);
+            animation-duration: 30s;
+            animation-delay: 4s;
+        }
+        .particle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 10%;
+            left: 10%;
+            background: radial-gradient(circle, #a6c1ee, transparent 70%);
+            animation-duration: 26s;
+            animation-delay: 1s;
+        }
+        @keyframes floatParticle {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translate(40px, -30px) scale(1.1) rotate(10deg);
+            }
+            66% {
+                transform: translate(-30px, 20px) scale(0.9) rotate(-8deg);
+            }
+            100% {
+                transform: translate(20px, -15px) scale(1.05) rotate(5deg);
+            }
+        }
+
+        /* ===== کانتینر اصلی ===== */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        /* ===== بازگشت ===== */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--purple-deep);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 20px -10px rgba(0, 0, 0, 0.10);
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 28px;
+        }
+        .back-link:hover {
+            background: #fff;
+            box-shadow: 0 12px 30px -12px rgba(90, 63, 140, 0.25);
+            transform: translateY(-2px);
+        }
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ===== هدر باشگاه ===== */
+        .club-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(14px);
+            border-radius: var(--radius-lg);
+            padding: 24px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow-card);
+        }
+        .club-header .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .club-header .brand .icon {
+            font-size: 40px;
+            animation: bounceMascot 3s infinite ease-in-out;
+        }
+        @keyframes bounceMascot {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-6px) rotate(4deg);
+            }
+        }
+        .club-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple-deep), var(--azure-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .club-header h1 small {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-light);
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--ink-light);
+        }
+        .club-stats {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--ink-light);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .stat-pill strong {
+            color: var(--purple-deep);
+            font-size: 18px;
+        }
+
+        /* ===== شبکه اصلی ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px);
+            border-radius: var(--radius-md);
+            padding: 24px 26px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title .emoji {
+            font-size: 22px;
+        }
+
+        /* ===== کارت چالش روزانه ===== */
+        .challenge-box {
+            background: linear-gradient(135deg, rgba(201, 168, 106, 0.08), rgba(127, 95, 199, 0.08));
+            border-radius: var(--radius-sm);
+            padding: 18px 20px;
+            border: 1.5px dashed var(--gold);
+            margin-top: 6px;
+        }
+        .challenge-box .q {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .challenge-box .hint {
+            font-size: 13px;
+            color: var(--ink-light);
+        }
+        .challenge-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+        .btn-sm {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 40px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #fff;
+            border: 1.5px solid rgba(0, 0, 0, 0.06);
+            color: var(--ink);
+        }
+        .btn-sm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.10);
+        }
+        .btn-sm.primary {
+            background: linear-gradient(135deg, var(--purple-mid), #9c7fd6);
+            color: #fff;
+            border: none;
+        }
+        .btn-sm.gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #fff;
+            border: none;
+        }
+
+        /* ===== نمودار رادار (مهارت‌ها) ===== */
+        .radar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .radar-svg {
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+        }
+        .skill-labels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-light);
+        }
+        .skill-labels span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .skill-labels .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* ===== پیشنهادات شخصی ===== */
+        .suggestion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-sm);
+            border-right: 4px solid var(--purple-mid);
+            transition: var(--transition);
+        }
+        .suggestion-item:hover {
+            background: #fff;
+            transform: translateX(-4px);
+        }
+        .suggestion-item .icon {
+            font-size: 24px;
+        }
+        .suggestion-item .text {
+            flex: 1;
+        }
+        .suggestion-item .text .title {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .suggestion-item .text .desc {
+            font-size: 13px;
+            color: var(--ink-light);
+        }
+
+        /* ===== گنجینه دانستنی‌ها (کارت‌های چرخان) ===== */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .knowledge-card {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            cursor: default;
+        }
+        .knowledge-card:hover {
+            background: #fff;
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.10);
+        }
+        .knowledge-card .emoji-big {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .knowledge-card .title {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .knowledge-card .desc {
+            font-size: 12px;
+            color: var(--ink-light);
+            margin-top: 4px;
+        }
+
+        /* ===== ردیف دوم ===== */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* ===== ریسپانسیو ===== */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 700px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .club-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+            .club-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .knowledge-grid {
+                grid-template-columns: 1fr;
+            }
+            .radar-svg {
+                max-width: 180px;
+            }
+            .back-link span {
+                display: none;
+            }
+        }
+        @media (max-width: 450px) {
+            .club-stats {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .stat-pill {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ===== انیمیشن ورود ===== */
+        .card {
+            opacity: 0;
+            animation: fadeSlide 0.6s ease forwards;
+        }
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        .bottom-grid .card:nth-child(1) {
+            animation-delay: 0.4s;
+        }
+        .bottom-grid .card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== پس‌زمینه ===== -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+
+        <!-- ===== بازگشت ===== -->
+        <a href="aidaacademy-landing.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>بازگشت به صفحه اصلی</span>
+        </a>
+
+        <!-- ===== هدر باشگاه ===== -->
+        <div class="club-header">
+            <div class="brand">
+                <span class="icon">🧠</span>
+                <div>
+                    <h1>
+                        باشگاه هوش آیدا
+                        <small>🌱 رشد هوش و استعداد با تمرین روزانه</small>
+                    </h1>
+                </div>
+            </div>
+            <div class="club-stats">
+                <div class="stat-pill">🔥 <strong id="streakCount">۰</strong> روز پیاپی</div>
+                <div class="stat-pill">⭐ <strong id="totalPoints">۰</strong> امتیاز</div>
+                <div class="stat-pill">🏅 <strong id="challengeDone">۰</strong> چالش حل‌شده</div>
+            </div>
+        </div>
+
+        <!-- ===== شبکه اصلی (۳ کارت) ===== -->
+        <div class="dashboard-grid">
+
+            <!-- ۱. چالش روزانه -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">⚡</span> چالش امروز</div>
+                <div class="challenge-box" id="dailyChallenge">
+                    <div class="q" id="challengeQuestion">بارگذاری...</div>
+                    <div class="hint" id="challengeHint">💡 برای دیدن پاسخ، روی دکمه کلیک کن</div>
+                    <div class="challenge-actions">
+                        <button class="btn-sm gold" id="showAnswerBtn">🔍 نمایش پاسخ</button>
+                        <button class="btn-sm primary" id="doneChallengeBtn">✅ انجام دادم!</button>
+                    </div>
+                    <div style="margin-top:10px; font-size:13px; color:var(--gold-dark); font-weight:600;" id="challengeFeedback"></div>
+                </div>
+                <div style="margin-top:12px; font-size:13px; color:var(--ink-light);">
+                    ⏳ چالش جدید هر روز ساعت ۸ صبح
+                </div>
+            </div>
+
+            <!-- ۲. نمودار مهارت‌ها (رادار) -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">📊</span> کارنامه هوش</div>
+                <div class="radar-container">
+                    <svg class="radar-svg" viewBox="0 0 200 200" id="radarChart">
+                        <!-- شبکه‌های کمکی -->
+                        <polygon points="100,20 180,80 150,170 50,170 20,80" fill="none" stroke="#ddd" stroke-width="1" />
+                        <polygon points="100,50 160,90 135,150 65,150 40,90" fill="none" stroke="#eee" stroke-width="1" />
+                        <polygon points="100,80 140,100 120,130 80,130 60,100" fill="none" stroke="#eee" stroke-width="1" />
+                        <!-- خطوط محور -->
+                        <line x1="100" y1="20" x2="100" y2="170" stroke="#ddd" stroke-width="1" />
+                        <line x1="20" y1="80" x2="180" y2="80" stroke="#ddd" stroke-width="1" />
+                        <line x1="50" y1="170" x2="150" y2="170" stroke="#ddd" stroke-width="1" />
+                        <line x1="180" y1="80" x2="50" y2="170" stroke="#ddd" stroke-width="1" />
+                        <line x1="20" y1="80" x2="150" y2="170" stroke="#ddd" stroke-width="1" />
+                        <!-- ناحیه مهارت‌ها (با داده‌های نمونه) -->
+                        <polygon id="skillPolygon" points="100,50 150,90 130,140 70,150 60,100" fill="rgba(127,95,199,0.25)" stroke="#7f5fc7" stroke-width="2.5" />
+                        <!-- نقاط -->
+                        <circle cx="100" cy="50" r="4" fill="#7f5fc7" />
+                        <circle cx="150" cy="90" r="4" fill="#7f5fc7" />
+                        <circle cx="130" cy="140" r="4" fill="#7f5fc7" />
+                        <circle cx="70" cy="150" r="4" fill="#7f5fc7" />
+                        <circle cx="60" cy="100" r="4" fill="#7f5fc7" />
+                    </svg>
+                </div>
+                <div class="skill-labels">
+                    <span><span class="dot" style="background:#7f5fc7;"></span> حافظه</span>
+                    <span><span class="dot" style="background:#3a7bd5;"></span> منطق</span>
+                    <span><span class="dot" style="background:#c9a86a;"></span> خلاقیت</span>
+                    <span><span class="dot" style="background:#e8d5a8;"></span> ریاضی</span>
+                    <span><span class="dot" style="background:#b39de0;"></span> کلامی</span>
+                </div>
+            </div>
+
+            <!-- ۳. پیشنهادات شخصی‌سازی‌شده -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">🎯</span> پیشنهادات امروز</div>
+                <div class="suggestion-list" id="suggestionList">
+                    <div class="suggestion-item">
+                        <span class="icon">📖</span>
+                        <div class="text">
+                            <div class="title">تقویت حافظه</div>
+                            <div class="desc">۵ دقیقه بازی به‌خاطرسپاری تصاویر</div>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <span class="icon">🧩</span>
+                        <div class="text">
+                            <div class="title">معمای منطقی</div>
+                            <div class="desc">حل یک سوال چالش‌برانگیز</div>
+                        </div>
+                    </div>
+                    <div class="suggestion-item">
+                        <span class="icon">🎨</span>
+                        <div class="text">
+                            <div class="title">خلاقیت</div>
+                            <div class="desc">یک داستان کوتاه با ۵ کلمه‌ی داده‌شده</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:14px; font-size:13px; color:var(--ink-light);">
+                    ⚡ بر اساس عملکرد شما در آزمون‌ها
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== ردیف پایین (۲ کارت) ===== -->
+        <div class="bottom-grid">
+
+            <!-- ۴. گنجینه دانستنی‌ها -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">📚</span> گنجینه دانستنی‌ها</div>
+                <div class="knowledge-grid" id="knowledgeGrid">
+                    <div class="knowledge-card">
+                        <span class="emoji-big">🌍</span>
+                        <div class="title">چرا آسمان آبی است؟</div>
+                        <div class="desc">پراکندگی نور خورشید توسط مولکول‌های هوا</div>
+                    </div>
+                    <div class="knowledge-card">
+                        <span class="emoji-big">🧬</span>
+                        <div class="title">DNA چیست؟</div>
+                        <div class="desc">مولکولی که اطلاعات ژنتیکی را حمل می‌کند</div>
+                    </div>
+                    <div class="knowledge-card">
+                        <span class="emoji-big">🚀</span>
+                        <div class="title">نخستین فضانورد</div>
+                        <div class="desc">یوری گاگارین در سال ۱۹۶۱</div>
+                    </div>
+                    <div class="knowledge-card">
+                        <span class="emoji-big">🐋</span>
+                        <div class="title">بزرگ‌ترین جانور</div>
+                        <div class="desc">نهنگ آبی با وزن ۲۰۰ تن</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ۵. پیگیری پیشرفت (نمودار خطی ساده) -->
+            <div class="card">
+                <div class="card-title"><span class="emoji">📈</span> پیشرفت هفتگی</div>
+                <div style="display:flex; align-items:flex-end; justify-content:space-around; height:100px; padding:10px 0; gap:6px;" id="weeklyChart">
+                    <!-- ستون‌ها توسط JS ساخته می‌شوند -->
+                </div>
+                <div style="display:flex; justify-content:space-around; font-size:11px; color:var(--ink-light); margin-top:4px;">
+                    <span>شنبه</span><span>یک‌شنبه</span><span>دوشنبه</span><span>سه‌شنبه</span><span>چهارشنبه</span><span>پنج‌شنبه</span><span>جمعه</span>
+                </div>
+                <div style="margin-top:12px; font-size:13px; color:var(--ink-light); text-align:center;">
+                    ⭐ مجموع امتیازات هفته: <strong id="weeklyTotal">۰</strong>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ===== اسکریپت کامل ===== -->
+    <script>
+        (function() {
+            // ---- داده‌های شبیه‌سازی ----
+            const challenges = [{
+                question: 'اگر یک ساعت ۳۰ دقیقه‌ی دیگر، ۴:۳۰ است، الان ساعت چند است؟',
+                answer: '۴:۰۰'
+            }, {
+                question: 'چند تا گوشه دارد یک مکعب؟',
+                answer: '۸ گوشه'
+            }, {
+                question: 'کدام عدد اگر برعکس شود، بزرگ‌تر می‌شود؟ (۶، ۹، ۱۸، ۲۴)',
+                answer: '۶ (چون ۹ می‌شود)'
+            }, {
+                question: 'یک مداد و یک پاک‌کن با هم ۲۰۰۰ تومان هستند. مداد ۱۵۰۰ تومان گران‌تر از پاک‌کن است. قیمت پاک‌کن چقدر است؟',
+                answer: '۲۵۰ تومان'
+            }];
+
+            // ---- وضعیت ذخیره‌شده در localStorage ----
+            let state = {
+                streak: parseInt(localStorage.getItem('aida_streak')) || 0,
+                points: parseInt(localStorage.getItem('aida_points')) || 0,
+                challengesDone: parseInt(localStorage.getItem('aida_challenges')) || 0,
+                weeklyData: JSON.parse(localStorage.getItem('aida_weekly')) || [0, 0, 0, 0, 0, 0, 0],
+                lastChallengeDate: localStorage.getItem('aida_last_challenge') || '',
+            };
+
+            // ---- عناصر ----
+            const streakEl = document.getElementById('streakCount');
+            const pointsEl = document.getElementById('totalPoints');
+            const challengeDoneEl = document.getElementById('challengeDone');
+            const challengeQuestion = document.getElementById('challengeQuestion');
+            const challengeHint = document.getElementById('challengeHint');
+            const challengeFeedback = document.getElementById('challengeFeedback');
+            const showAnswerBtn = document.getElementById('showAnswerBtn');
+            const doneBtn = document.getElementById('doneChallengeBtn');
+            const weeklyChart = document.getElementById('weeklyChart');
+            const weeklyTotalEl = document.getElementById('weeklyTotal');
+
+            // ---- انتخاب چالش روز (بر اساس تاریخ) ----
+            function getDailyChallenge() {
+                const today = new Date().toDateString();
+                const dayIndex = new Date().getDate();
+                const idx = dayIndex % challenges.length;
+                return challenges[idx];
+            }
+
+            let currentChallenge = getDailyChallenge();
+
+            // ---- نمایش چالش ----
+            challengeQuestion.textContent = currentChallenge.question;
+            challengeHint.textContent = '💡 برای دیدن پاسخ، روی دکمه کلیک کن';
+            challengeFeedback.textContent = '';
+
+            // ---- نمایش پاسخ ----
+            showAnswerBtn.addEventListener('click', function() {
+                challengeHint.textContent = '✅ پاسخ: ' + currentChallenge.answer;
+                challengeFeedback.textContent = '👀 حالا می‌توانی روی "انجام دادم!" کلیک کنی.';
+            });
+
+            // ---- انجام چالش ----
+            doneBtn.addEventListener('click', function() {
+                const today = new Date().toDateString();
+                if (state.lastChallengeDate === today) {
+                    challengeFeedback.textContent = '⏳ امروز قبلاً این چالش را انجام دادی!';
+                    return;
+                }
+
+                // به‌روزرسانی امتیاز و رکورد
+                state.points += 10;
+                state.streak += 1;
+                state.challengesDone += 1;
+                state.lastChallengeDate = today;
+
+                // به‌روزرسانی داده‌های هفتگی
+                const dayOfWeek = new Date().getDay(); // 0=شنبه (در ایران)
+                const persianDay = (dayOfWeek + 1) % 7; // شنبه=0
+                state.weeklyData[persianDay] += 10;
+
+                // ذخیره در localStorage
+                saveState();
+
+                // به‌روزرسانی UI
+                updateUI();
+                challengeFeedback.textContent = '🎉 آفرین! ۱۰ امتیاز گرفتی.';
+                challengeHint.textContent = '✅ پاسخ: ' + currentChallenge.answer;
+                doneBtn.disabled = true;
+                setTimeout(() => { doneBtn.disabled = false; }, 1000);
+
+                // تغییر چالش برای روز بعد (اختیاری - برای تست می‌توان یک چالش جدید نشان داد)
+                // اما چون روز عوض نشده، همان چالش می‌ماند.
+            });
+
+            // ---- ذخیره وضعیت ----
+            function saveState() {
+                localStorage.setItem('aida_streak', state.streak);
+                localStorage.setItem('aida_points', state.points);
+                localStorage.setItem('aida_challenges', state.challengesDone);
+                localStorage.setItem('aida_weekly', JSON.stringify(state.weeklyData));
+                localStorage.setItem('aida_last_challenge', state.lastChallengeDate);
+            }
+
+            // ---- به‌روزرسانی UI ----
+            function updateUI() {
+                streakEl.textContent = state.streak;
+                pointsEl.textContent = state.points;
+                challengeDoneEl.textContent = state.challengesDone;
+                updateWeeklyChart();
+            }
+
+            // ---- نمودار هفتگی ----
+            function updateWeeklyChart() {
+                const data = state.weeklyData;
+                const max = Math.max(...data, 1);
+                weeklyChart.innerHTML = '';
+                data.forEach(val => {
+                    const height = (val / max) * 80 + 10;
+                    const bar = document.createElement('div');
+                    bar.style.cssText = `
+                            flex:1;
+                            background: linear-gradient(180deg, #7f5fc7, #b39de0);
+                            height: ${height}px;
+                            border-radius: 8px 8px 4px 4px;
+                            min-height: 6px;
+                            transition: height 0.4s ease;
+                            box-shadow: 0 2px 8px rgba(127,95,199,0.15);
+                        `;
+                    bar.title = val + ' امتیاز';
+                    weeklyChart.appendChild(bar);
+                });
+                const total = data.reduce((a, b) => a + b, 0);
+                weeklyTotalEl.textContent = total;
+            }
+
+            // ---- تنظیم رادار (با داده‌های تصادفی اما ثابت برای نمایش) ----
+            function updateRadar() {
+                // داده‌های نمونه (از ۲۰ تا ۱۰۰)
+                const skills = [65, 80, 55, 70, 60];
+                const points = [
+                    [100, 20],
+                    [180, 80],
+                    [150, 170],
+                    [50, 170],
+                    [20, 80]
+                ];
+                const newPoints = skills.map((val, i) => {
+                    const base = points[i];
+                    const scale = 0.2 + (val / 100) * 0.8;
+                    const x = 20 + (base[0] - 20) * scale;
+                    const y = 20 + (base[1] - 20) * scale;
+                    return { x, y };
+                });
+                const polygon = document.getElementById('skillPolygon');
+                const coords = newPoints.map(p => `${p.x},${p.y}`).join(' ');
+                polygon.setAttribute('points', coords);
+
+                // به‌روزرسانی نقاط
+                const circles = document.querySelectorAll('#radarChart circle');
+                circles.forEach((circle, idx) => {
+                    if (idx < 5) {
+                        circle.setAttribute('cx', newPoints[idx].x);
+                        circle.setAttribute('cy', newPoints[idx].y);
+                    }
+                });
+            }
+
+            // ---- مقداردهی اولیه ----
+            function init() {
+                // بررسی روز برای ریست استریک (اگر روز عوض شده باشد)
+                const today = new Date().toDateString();
+                const lastDate = localStorage.getItem('aida_last_date') || '';
+                if (lastDate && lastDate !== today) {
+                    // اگر روز عوض شده، استریک را ریست نکن، فقط چالش جدید نشان بده
+                    // اما استریک را نگه می‌داریم (فقط در صورت عدم انجام چالش در روز قبل، استریک صفر می‌شود)
+                    // برای سادگی، استریک را کاهش نمی‌دهیم (می‌توان منطق پیچیده‌تر داشت)
+                }
+                localStorage.setItem('aida_last_date', today);
+
+                updateUI();
+                updateRadar();
+
+                // اگر چالش امروز انجام شده، پیام بده
+                if (state.lastChallengeDate === today) {
+                    challengeFeedback.textContent = '✅ امروز چالش را انجام دادی! فردا بازگرد.';
+                    challengeHint.textContent = '💡 پاسخ: ' + currentChallenge.answer;
+                }
+            }
+
+            // ---- شروع ----
+            init();
+
+            // ---- پیشنهادات (داینامیک) ----
+            // با کلیک روی هر آیتم پیشنهاد، می‌توان یک اکشن تعریف کرد (مثلاً باز کردن صفحه‌ی تمرین)
+            document.querySelectorAll('.suggestion-item').forEach((item, idx) => {
+                item.style.cursor = 'pointer';
+                item.addEventListener('click', function() {
+                    const titles = ['حافظه', 'منطق', 'خلاقیت'];
+                    alert('🔹 پیشنهاد "' + titles[idx] + '":\n' + this.querySelector('.desc').textContent);
+                });
+            });
+
+            // ---- کارت‌های دانش (با کلیک توضیح بیشتر) ----
+            document.querySelectorAll('.knowledge-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.title').textContent;
+                    const desc = this.querySelector('.desc').textContent;
+                    alert('📖 ' + title + '\n\n' + desc);
+                });
+            });
+
+            console.log('🧠 باشگاه هوش آیدا فعال شد!');
+        })();
+    </script>
+
+</body>
+</html>
